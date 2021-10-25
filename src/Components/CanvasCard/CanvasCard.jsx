@@ -4,12 +4,16 @@ import SideBar from "../SideBar/SideBar";
 
 const CanvasCard = ({ number, addElementToRow, rowId }) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
-  const handleChange = () => setSideBarOpen(!sideBarOpen);
+  const [colId, setColId] = useState(1);
+  const handleChange = (i) => {
+    // console.log("col ==>> ", i);
+    setColId(i);
+    setSideBarOpen(!sideBarOpen);
+  };
   const createElement = () => {
     const temp = [];
-    const gridCount = Math.abs(12 / number);
 
-    for (let i = 1; i <= number; i++) {
+    for (let i = 0; i < number; i++) {
       temp.push(
         <div>
           <Paper
@@ -25,7 +29,7 @@ const CanvasCard = ({ number, addElementToRow, rowId }) => {
               sx={{
                 marginTop: number === 1 ? "1.5%" : "3%",
               }}
-              onClick={handleChange}
+              onClick={() => handleChange(i)}
             >
               Add new element
             </Button>
@@ -49,6 +53,7 @@ const CanvasCard = ({ number, addElementToRow, rowId }) => {
           handleChange={handleChange}
           addElementToRow={addElementToRow}
           rowId={rowId}
+          colId={colId}
         />
       ) : (
         " "
