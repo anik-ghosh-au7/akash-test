@@ -6,45 +6,40 @@ const CanvasCard = ({ number, addElementToRow, rowId }) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const handleChange = () => setSideBarOpen(!sideBarOpen);
   const createElement = () => {
-    // console.log("Item", number);
-    // console.log("Row ID", rowId);
     const temp = [];
     const gridCount = Math.abs(12 / number);
 
     for (let i = 1; i <= number; i++) {
       temp.push(
-        <Grid
-          item
-          xs={gridCount}
-          sx={{ display: "flex", justifyContent: "center" }}
-        >
+        <div>
           <Paper
+            elevation={1}
             sx={{
               width: number === 1 ? "1000px" : "500px",
-              height: "100px",
-              marginTop: "16px",
+              height: "70px",
+              marginTop: "2rem",
             }}
           >
             <Button
               variant="outlined"
               sx={{
-                marginTop: "3%",
+                marginTop: number === 1 ? "1.5%" : "3%",
               }}
               onClick={handleChange}
             >
               Add new element
             </Button>
           </Paper>
-        </Grid>
+        </div>
       );
     }
     return temp;
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <Box>
-        <Grid container spacing={2} sx={{ textAlign: "center" }}>
+        <Grid container spacing={1} sx={{ textAlign: "center" }}>
           {createElement()}
         </Grid>
       </Box>
