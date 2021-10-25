@@ -4,6 +4,7 @@ import { v4 as uuid } from "uuid";
 import MenuBar from "./Components/MenuBar/MenuBar";
 import Canvas from "./Components/Canvas/Canvas";
 import AppBarNav from "./Components/AppBarNav/AppBarNav";
+import SideNavBar from "./Components/SideNAVBar/SideNavBar";
 
 function App() {
   const [card, setCard] = useState([]);
@@ -42,9 +43,10 @@ function App() {
   };
   return (
     <div className="App">
+      <SideNavBar />
       <AppBarNav />
       <MenuBar addRowToCanvas={addRowToCanvas} />
-      <Canvas card={card} addElementToRow={addElementToRow} />;
+      <Canvas card={card} addElementToRow={addElementToRow} />
     </div>
   );
 }
