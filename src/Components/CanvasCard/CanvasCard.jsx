@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Paper, Grid, Button } from "@mui/material/";
 import SideBar from "../SideBar/SideBar";
 
-const CanvasCard = ({ number, addElementToRow, rowId }) => {
+const CanvasCard = ({ number, addElementToRow, rowId, item }) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [colId, setColId] = useState(1);
   const handleChange = (i) => {
@@ -15,26 +15,41 @@ const CanvasCard = ({ number, addElementToRow, rowId }) => {
 
     for (let i = 0; i < number; i++) {
       temp.push(
-        <div>
-          <Paper
-            elevation={1}
-            sx={{
-              width: number === 1 ? "1000px" : "500px",
-              height: "70px",
-              marginTop: "2rem",
-            }}
-          >
-            <Button
-              variant="outlined"
+        item.elements[i].type ? (
+          <div>
+            <Paper
+              elevation={1}
               sx={{
-                marginTop: number === 1 ? "1.5%" : "3%",
+                width: number === 1 ? "1000px" : "500px",
+                height: "70px",
+                marginTop: "2rem",
               }}
-              onClick={() => handleChange(i)}
             >
-              Add new element
-            </Button>
-          </Paper>
-        </div>
+              {item.elements[i].type}
+            </Paper>
+          </div>
+        ) : (
+          <div>
+            <Paper
+              elevation={1}
+              sx={{
+                width: number === 1 ? "1000px" : "500px",
+                height: "70px",
+                marginTop: "2rem",
+              }}
+            >
+              <Button
+                variant="outlined"
+                sx={{
+                  marginTop: number === 1 ? "1.5%" : "3%",
+                }}
+                onClick={() => handleChange(i)}
+              >
+                Add new element
+              </Button>
+            </Paper>
+          </div>
+        )
       );
     }
     return temp;

@@ -12,6 +12,7 @@ const Canvas = ({ card, addElementToRow }) => {
         rowId={index}
         number={item.column}
         addElementToRow={addElementToRow}
+        item={item}
       />
     ));
   };
