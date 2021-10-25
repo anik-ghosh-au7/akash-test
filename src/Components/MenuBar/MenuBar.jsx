@@ -17,19 +17,11 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 
 // imported component
-import SideBarRow from "../SideBarRows/SideBarRows";
-import SideBarElement from "../SideBarElement/SideBarElement";
+import SideBar from "../SideBar/SideBar";
 
-const MenuBar = ({
-  addCardToCanvas,
-  addElementToCard,
-  handleSideBarRowOpen,
-  handleSideBarRowClose,
-  handleSideBarElementOpen,
-  handleSideBarElementClose,
-  sideBarRow,
-  sideBarElement,
-}) => {
+const MenuBar = ({ addRowToCanvas }) => {
+  const [sideBarOpen, setSideBarOpen] = useState(false);
+  const handleChange = () => setSideBarOpen(!sideBarOpen);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -203,7 +195,7 @@ const MenuBar = ({
               sx={{
                 color: "#a6a6a6",
               }}
-              onClick={handleSideBarRowOpen}
+              onClick={handleChange}
             >
               Row
             </Button>
@@ -240,7 +232,7 @@ const MenuBar = ({
               sx={{
                 color: "#a6a6a6",
               }}
-              onClick={handleSideBarElementOpen}
+              //   onClick={handleSideBarElementOpen}
             >
               Element
             </Button>
@@ -294,20 +286,11 @@ const MenuBar = ({
         </Toolbar>
       </AppBar>
       <div>
-        {sideBarRow ? (
-          <SideBarRow
-            handleSideBarRowOpen={handleSideBarRowOpen}
-            handleSideBarRowClose={handleSideBarRowClose}
-            addCardToCanvas={addCardToCanvas}
-          />
-        ) : (
-          " "
-        )}
-        {sideBarElement ? (
-          <SideBarElement
-            handleSideBarElementOpen={handleSideBarElementOpen}
-            handleSideBarElementClose={handleSideBarElementClose}
-            addElementToCard={addElementToCard}
+        {sideBarOpen ? (
+          <SideBar
+            addRowToCanvas={addRowToCanvas}
+            handleChange={handleChange}
+            type="Row"
           />
         ) : (
           " "

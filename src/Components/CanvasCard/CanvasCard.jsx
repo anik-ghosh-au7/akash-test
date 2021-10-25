@@ -1,23 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Paper, Grid, Button } from "@mui/material/";
+import SideBar from "../SideBar/SideBar";
 
-const CanvasCard = ({
-  number,
-  handleSideBarElementOpen,
-  row,
-  setCurrElem,
-  card,
-  setCard,
-}) => {
-  // card = { card };
-  // setCard = { setCard };
-  const handleSideBarElement = (col) => {
-    setCurrElem({ row, col });
-
-    handleSideBarElementOpen(row, col, "hello world");
-  };
+const CanvasCard = ({ number, addElementToRow, rowId }) => {
+  const [sideBarOpen, setSideBarOpen] = useState(false);
+  const handleChange = () => setSideBarOpen(!sideBarOpen);
   const createElement = () => {
-    console.log("Item", number);
+    // console.log("Item", number);
+    // console.log("Row ID", rowId);
     const temp = [];
     const gridCount = Math.abs(12 / number);
 
@@ -37,10 +27,10 @@ const CanvasCard = ({
           >
             <Button
               variant="outlined"
-              onClick={() => handleSideBarElement(i)}
               sx={{
                 marginTop: "3%",
               }}
+              onClick={handleChange}
             >
               Add new element
             </Button>
@@ -58,6 +48,16 @@ const CanvasCard = ({
           {createElement()}
         </Grid>
       </Box>
+      {sideBarOpen ? (
+        <SideBar
+          type="Element"
+          handleChange={handleChange}
+          addElementToRow={addElementToRow}
+          rowId={rowId}
+        />
+      ) : (
+        " "
+      )}
     </div>
   );
 };
